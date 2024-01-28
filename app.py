@@ -14,14 +14,14 @@ def amongsays(text):
         else:
             by_lines = [one_line]
 
-        centering = ' ' * (int(len(by_lines[0])/2))
-        len_of_words = len(centering)*2 + len(by_lines[0])
+        centering = ' ' * (int(16 - len(by_lines[0])/2))
+        text_len = len(centering)*2 + len(by_lines[0])
 
         speech_bubble = ""
         for line in by_lines:
             speech_bubble += f"|{centering}{line}{centering}|\n"
 
-        speech_bubble += f"\{'_' * len_of_words}/"
+        speech_bubble += f"\{'_' * text_len}/"
         return speech_bubble
 
     crewmate = ["          __.-------..._",
