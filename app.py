@@ -1,27 +1,47 @@
 def amongsays(text):
-    def spread_text(one_line):
-        if len(one_line) > 35:
-            next_line = one_line
-            by_lines = []
-            while len(next_line) > 35:
-                if " " in next_line:
-                    cut = next_line[35:].rfind(" ")-1
-                else:
-                    cut = 35
-                by_lines.append(next_line[:cut])
-                next_line = next_line[cut:]
-            by_lines.append(next_line)
+    def cut_string(string: str):
+        among_width = 32
+        if len(string) < among_width:
+            centering_len = among_width - len(string) / 2
+            if int(centering_len) <= centering_len - 0.5:
+                centering_len = (int(centering_len) + 1) /2
+            else:
+                centering_len = int(centering_len) /2
+            speech_bubble = f"|{' ' * int(centering_len)}{string}{' ' * int(centering_len)}|\n"
+            longest_len = among_width
         else:
-            by_lines = [one_line]
+            split_string = []
+            while len(string) > among_width:
+                if " " in string:
+                    cut_index = string[:among_width].rfind(" ") + 1
+                elif "\n" in string:
+                    cut_index = string[:among_width].rfind("\n")
+                else:
+                    cut_index = among_width
+                split_string.append(string[:cut_index])
+                string = string[cut_index:]
+            split_string.append(string)
 
-        centering = ' ' * (int(16 - len(by_lines[0])/2))
-        text_len = len(centering)*2 + len(by_lines[0])
+            longest_len = 0
+            for i in range(len(split_string)):
+                if len(split_string[i]) > len(split_string[i-1]):
+                    longest_len = len(split_string[i])
 
-        speech_bubble = ""
-        for line in by_lines:
-            speech_bubble += f"|{centering}{line}{centering}|\n"
+            speech_bubble = ""
+            prev_len = 37
+            for line in split_string:
+                centering_len = longest_len/2 - len(line)/2
+                if type(centering_len) == float:
+                    centering_len = int(centering_len) + 1
+                new_line = f"|{' ' * int(centering_len)}{line}{' ' * int(centering_len)}|\n"
+                if len(new_line) < prev_len:
+                    new_line = f"|{' ' * int(centering_len)}{line}{' ' * (int(centering_len) + 1)}|\n"
+                speech_bubble += new_line
+                prev_len = len(new_line)
 
-        speech_bubble += f"\{'_' * text_len}/"
+            longest_len += 2
+
+        speech_bubble += f"\{'_' * longest_len}/"
         return speech_bubble
 
     crewmate = ["          __.-------..._",
@@ -39,7 +59,7 @@ def amongsays(text):
                "     |          |         | ",
                "     \_________/ \________/ "]
 
-    bubble = spread_text(text)
+    bubble = cut_string(text)
     print(bubble)
     for line in crewmate:
         print(line)
@@ -47,7 +67,9 @@ def amongsays(text):
 
 def main():
     if __name__ == '__main__':
-        user_input = input()
+        #user_input = input()
+        user_input = "I like to creep around my home and act like a goblin. I don’t know why but I just enjoy doing this. Maybe it’s my way of dealing with stress or something but I just do it about once every week. Generally I’ll carry around a sack and creep around in a sort of crouch-walking position making goblin noises, then I’ll walk around my house and pick up various different “trinkets” and put them in my bag while saying stuff like “I’ll be having that” and laughing maniacally in my goblin voice (“trinkets” can include anything from shit I find on the ground to cutlery or other utensils). The other day I was talking with my neighbours and they mentioned hearing weird noises like what I wrote about and I was just internally screaming the entire conversation. I’m 99% sure they don’t know it’s me but god that 1% chance is seriously weighing on my mind."
+        #user_input = "hi"
         amongsays(user_input)
 
 
