@@ -2,11 +2,11 @@ def amongsay(text):
     def cut_string(string: str):
         among_width = 32
         if len(string) < among_width:
-            centering_len = among_width - len(string) / 2
+            centering_len = (among_width - len(string)) / 2
             if int(centering_len) <= centering_len - 0.5:
-                centering_len = (int(centering_len) + 1) /2
+                centering_len = (int(centering_len) + 1)
             else:
-                centering_len = int(centering_len) /2
+                centering_len = int(centering_len)
             speech_bubble = f"|{' ' * int(centering_len)}{string}{' ' * int(centering_len)}|\n"
             longest_len = len(string)
         else:
@@ -41,7 +41,7 @@ def amongsay(text):
 
             longest_len += 2
 
-        speech_bubble += f"\{'_' * (among_width+2)}/"
+        speech_bubble += f"\{'_' * (among_width)}/"
         return speech_bubble
 
     crewmate = ["          __.-------..._",
