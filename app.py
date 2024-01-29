@@ -43,8 +43,11 @@ def amongsay(text):
                 prev_len = len(new_line)
 
             longest_len += 2
+        if longest_len > among_width:
+            speech_bubble += f"\{'_' * (longest_len)}/"
+        else:
+            speech_bubble += f"\{'_' * (among_width)}/"
 
-        speech_bubble += f"\{'_' * (among_width)}/"
         return speech_bubble
 
     crewmate = ["          __.-------..._",
