@@ -1,4 +1,4 @@
-def amongsays(text):
+def amongsay(text):
     def cut_string(string: str):
         among_width = 32
         if len(string) < among_width:
@@ -68,7 +68,7 @@ def amongsays(text):
 def main():
     if __name__ == '__main__':
         user_input = input()
-        amongsays(user_input)
+        amongsay(user_input)
 
 
 main()
