@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import argparse
 
 
@@ -76,6 +77,7 @@ def main():
         parser = argparse.ArgumentParser(
             prog="amongsay",
             description="Prints a crewmate from Among Us echoing given text")
+        parser.add_argument('--version', action='version', version='Jan 29 2024')
         parser.add_argument('-s', '--string', type=str, help="Provide some text that the crewmate will say")
         args, unknown_args = parser.parse_known_args()
         text = ""
