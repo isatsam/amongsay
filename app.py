@@ -8,7 +8,7 @@ def amongsay(text):
             else:
                 centering_len = int(centering_len) /2
             speech_bubble = f"|{' ' * int(centering_len)}{string}{' ' * int(centering_len)}|\n"
-            longest_len = among_width
+            longest_len = len(string)
         else:
             split_string = []
             while len(string) > among_width:
@@ -41,7 +41,7 @@ def amongsay(text):
 
             longest_len += 2
 
-        speech_bubble += f"\{'_' * longest_len}/"
+        speech_bubble += f"\{'_' * (among_width+2)}/"
         return speech_bubble
 
     crewmate = ["          __.-------..._",
