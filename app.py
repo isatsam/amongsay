@@ -1,3 +1,6 @@
+import argparse
+
+
 def amongsay(text):
     def cut_string(string: str):
         among_width = 32
@@ -66,9 +69,19 @@ def amongsay(text):
 
 
 def main():
-    if __name__ == '__main__':
-        user_input = input()
-        amongsay(user_input)
-
+    if __name__ == "__main__":
+        parser = argparse.ArgumentParser(
+            prog="amongsay",
+            description="Prints a crewmate from Among Us echoing given text")
+        parser.add_argument('-s', '--string', type=str, help="Provide some text that the crewmate will say")
+        args, unknown_args = parser.parse_known_args()
+        text = ""
+        if args.string:
+            text = args.string
+        if unknown_args:
+            if args.string:
+                text += " "
+            text += " ".join(unknown_args)
+        amongsay(text)
 
 main()
